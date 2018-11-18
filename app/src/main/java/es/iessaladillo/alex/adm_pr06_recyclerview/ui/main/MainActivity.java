@@ -53,25 +53,23 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         viewModel = ViewModelProviders.of(this).get(MainActivityViewModel.class);
         initViews();
-        if (savedInstanceState != null) {
-            setupSaveData(savedInstanceState);
-        }
+        setupSaveData();
     }
 
-    private void setupSaveData(Bundle savedInstanceState) {
-        if (savedInstanceState.getCharSequence(VALID_NAME) == getString(R.string.main_invalid_data)) {
+    private void setupSaveData() {
+        if (!viewModel.isValid_name()) {
             validateName();
         }
-        if (savedInstanceState.getCharSequence(VALID_EMAIL) == getString(R.string.main_invalid_data)) {
+        if (!viewModel.isValid_email()) {
             validateEmail();
         }
-        if (savedInstanceState.getCharSequence(VALID_PHONENUMBER) == getString(R.string.main_invalid_data)) {
+        if (!viewModel.isValid_phonenumber()) {
             validatePhonenumber();
         }
-        if (savedInstanceState.getCharSequence(VALID_ADDRESS) == getString(R.string.main_invalid_data)) {
+        if (!viewModel.isValid_address()) {
             validateAddress();
         }
-        if (savedInstanceState.getCharSequence(VALID_WEB) == getString(R.string.main_invalid_data)) {
+        if (!viewModel.isValid_web()) {
             validateWeb();
         }
     }
@@ -89,13 +87,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void startOnchange() {
-        TextViewUtils.afterTextChanged(txtName, lblName, this);
-        TextViewUtils.onTextChanged(txtEmail, lblEmail, imgEmail, this);
-        TextViewUtils.onTextChanged(txtPhonenumber, lblPhonenumber, imgPhonenumber, this);
-        TextViewUtils.afterTextChanged(txtAddress, lblAddress, imgAddress, this);
-        TextViewUtils.onTextChanged(txtWeb, lblWeb, imgWeb, this);
-
-
+        TextViewUtils.afterTextChanged(txtName, lblName, this, viewModel);
+        TextViewUtils.onTextChanged(txtEmail, lblEmail, imgEmail, this, viewModel);
+        TextViewUtils.onTextChanged(txtPhonenumber, lblPhonenumber, imgPhonenumber, this, viewModel);
+        TextViewUtils.afterTextChanged(txtAddress, lblAddress, imgAddress, this, viewModel);
+        TextViewUtils.onTextChanged(txtWeb, lblWeb, imgWeb, this, viewModel);
     }
 
     private void finishOnChange() {
@@ -294,6 +290,12 @@ public class MainActivity extends AppCompatActivity {
         validPhonenumber = validatePhonenumber();
         validAddress = validateAddress();
         validWeb = validateWeb();
+
+        viewModel.setValid_name(validName);
+        viewModel.setValid_email(validEmail);
+        viewModel.setValid_phonenumber(validPhonenumber);
+        viewModel.setValid_address(validAddress);
+        viewModel.setValid_web(validWeb);
 
         return validName && validEmail && validPhonenumber && validAddress && validWeb;
     }
