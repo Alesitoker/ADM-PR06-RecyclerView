@@ -1,4 +1,4 @@
-package es.iessaladillo.alex.adm_pr06_recyclerview.ui.main;
+package es.iessaladillo.alex.adm_pr06_recyclerview.ui.profile;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,7 +21,7 @@ import es.iessaladillo.alex.adm_pr06_recyclerview.utils.SnackbarUtils;
 import es.iessaladillo.alex.adm_pr06_recyclerview.utils.TextViewUtils;
 import es.iessaladillo.alex.adm_pr06_recyclerview.utils.ValidationUtils;
 
-public class MainActivity extends AppCompatActivity {
+public class ProfileActivity extends AppCompatActivity {
 
     private TextView lblAvatar;
     private ImageView imgAvatar;
@@ -39,21 +39,19 @@ public class MainActivity extends AppCompatActivity {
     private ImageView imgPhonenumber;
     private ImageView imgAddress;
     private ImageView imgWeb;
-    private final String VALID_NAME = "VALID_NAME";
-    private final String VALID_EMAIL = "VALID_EMAIL";
-    private final String VALID_PHONENUMBER = "VALID_PHONENUMBER";
-    private final String VALID_ADDRESS = "VALID_ADDRESS";
-    private final String VALID_WEB = "VALID_WEB";
     private final int RC_AVATAR = 12;
-    private MainActivityViewModel viewModel;
+    private ProfileActivityViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        viewModel = ViewModelProviders.of(this).get(MainActivityViewModel.class);
+        viewModel = ViewModelProviders.of(this).get(ProfileActivityViewModel.class);
         initViews();
-        setupSaveData();
+        //Al iniciar por primera vez no entra.
+        if (savedInstanceState != null) {
+            setupSaveData();
+        }
     }
 
     private void setupSaveData() {
@@ -307,15 +305,5 @@ public class MainActivity extends AppCompatActivity {
         } else {
             SnackbarUtils.snackbar(lblName, getString(R.string.main_saved_succesfully));
         }
-    }
-
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putCharSequence(VALID_NAME, txtName.getError());
-        outState.putCharSequence(VALID_EMAIL, txtEmail.getError());
-        outState.putCharSequence(VALID_PHONENUMBER, txtPhonenumber.getError());
-        outState.putCharSequence(VALID_ADDRESS, txtAddress.getError());
-        outState.putCharSequence(VALID_WEB, txtWeb.getError());
     }
 }

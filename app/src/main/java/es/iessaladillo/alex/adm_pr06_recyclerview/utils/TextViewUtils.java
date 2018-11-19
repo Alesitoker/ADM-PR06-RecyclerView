@@ -9,14 +9,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import es.iessaladillo.alex.adm_pr06_recyclerview.R;
-import es.iessaladillo.alex.adm_pr06_recyclerview.ui.main.MainActivityViewModel;
+import es.iessaladillo.alex.adm_pr06_recyclerview.ui.profile.ProfileActivityViewModel;
 
 
 public class TextViewUtils {
     private TextViewUtils() {
     }
 
-    public static void afterTextChanged(EditText text, TextView view, Context context, MainActivityViewModel viewModel) {
+    public static void afterTextChanged(EditText text, TextView view, Context context, ProfileActivityViewModel viewModel) {
         text.addTextChangedListener(new TextWatcher() {
             boolean validation;
             @Override
@@ -37,7 +37,7 @@ public class TextViewUtils {
         });
     }
 
-    public static void afterTextChanged(EditText text, TextView view, ImageView img, Context context, MainActivityViewModel viewModel) {
+    public static void afterTextChanged(EditText text, TextView view, ImageView img, Context context, ProfileActivityViewModel viewModel) {
         text.addTextChangedListener(new TextWatcher() {
             boolean validation;
             @Override
@@ -65,7 +65,7 @@ public class TextViewUtils {
         }
     }
 
-    public static void onTextChanged(EditText txt, TextView lbl, ImageView img, Context context, MainActivityViewModel viewModel) {
+    public static void onTextChanged(EditText txt, TextView lbl, ImageView img, Context context, ProfileActivityViewModel viewModel) {
         txt.addTextChangedListener(new TextWatcher() {
             boolean validation = false;
             @Override

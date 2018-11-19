@@ -10,15 +10,15 @@ import es.iessaladillo.alex.adm_pr06_recyclerview.local.model.Avatar;
 
 // DO NOT TOUCH
 
-public class Database {
+public class AvatarDatabase {
 
-    private static Database instance;
+    private static AvatarDatabase instance;
 
     private final ArrayList<Avatar> avatars = new ArrayList<>();
     private final Random random = new Random(1);
     private long count;
 
-    private Database() {
+    private AvatarDatabase() {
         insertAvatar(new Avatar(R.drawable.cat1, "Tom"));
         insertAvatar(new Avatar(R.drawable.cat2, "Luna"));
         insertAvatar(new Avatar(R.drawable.cat3, "Simba"));
@@ -27,11 +27,11 @@ public class Database {
         insertAvatar(new Avatar(R.drawable.cat6, "Nina"));
     }
 
-    public static Database getInstance() {
+    public static AvatarDatabase getInstance() {
         if (instance == null) {
-            synchronized (Database.class) {
+            synchronized (AvatarDatabase.class) {
                 if (instance == null) {
-                    instance = new Database();
+                    instance = new AvatarDatabase();
                 }
             }
         }
