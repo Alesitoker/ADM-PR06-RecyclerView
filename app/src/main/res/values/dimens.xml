@@ -10,4 +10,12 @@
     <dimen name="lbl_imgAvatarProfile_padding">8dp</dimen>
     <dimen name="profile_margin">8dp</dimen>
     <dimen name="lbl_imgAvatar_padding">4dp</dimen>
+    <dimen name="list_lblEmptyView_drawablePadding">8dp</dimen>
+    <dimen name="list_fabtnAdd_margin">16dp</dimen>
+    <dimen name="list_item_imgAvatarCv_size">48dp</dimen>
+    <dimen name="list_item_CLayout">16dp</dimen>
+    <dimen name="list_item_marginStart">8dp</dimen>
+    <dimen name="list_item_marginStart_btnEdit">16dp</dimen>
+    <dimen name="list_item_marginStart_btnDelete">48dp</dimen>
+    <dimen name="list_item_marginTop_btn">8dp</dimen>
 </resources>
