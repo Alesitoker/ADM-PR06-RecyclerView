@@ -13,12 +13,12 @@ public class User {
 
     public User(String name, String email, int phoneNumber, String address, String web) {
         id = counterId;
-        this.name = name;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-        this.address = address;
-        this.web = web;
         counterId++;
+        setName(name);
+        setEmail(email);
+        setPhoneNumber(phoneNumber);
+        setAddress(address);
+        setWeb(web);
     }
 
     public long getId() {
