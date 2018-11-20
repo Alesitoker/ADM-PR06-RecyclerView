@@ -4,13 +4,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import es.iessaladillo.alex.adm_pr06_recyclerview.local.model.User;
 
 public class UserDatabase {
 
     private static UserDatabase instance;
-    private List<User> users = new ArrayList<>();
+    private List<User> users;
     private MutableLiveData<List<User>> usersLiveData = new MutableLiveData<>();
 
     private UserDatabase() {
@@ -33,7 +34,11 @@ public class UserDatabase {
         return instance;
     }
 
-    public void updateUsersLiveData() {
+    public LiveData<List<User>> getUsers() {
+        return usersLiveData;
+    }
+
+    private void updateUsersLiveData() {
         usersLiveData.setValue(users);
     }
 
