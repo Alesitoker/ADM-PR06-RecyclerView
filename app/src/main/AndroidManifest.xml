@@ -22,9 +22,14 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".ui.profile.ProfileActivity"
+            android:label="@string/profile_user"
+            android:parentActivityName=".ui.list.ListUsersActivity"/>
+        <activity
             android:name=".ui.avatar.AvatarActivity"
             android:label="@string/avatar_label"
             android:parentActivityName=".ui.profile.ProfileActivity"/>
     </application>
+
 
 </manifest>
