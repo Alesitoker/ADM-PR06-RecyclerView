@@ -45,7 +45,7 @@ public class ProfileActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_profile_full);
         viewModel = ViewModelProviders.of(this).get(ProfileActivityViewModel.class);
         initViews();
         //Al iniciar por primera vez no entra.
