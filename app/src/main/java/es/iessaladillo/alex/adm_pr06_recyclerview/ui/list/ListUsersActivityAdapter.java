@@ -4,8 +4,12 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.view.ViewCompat;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
@@ -52,12 +56,29 @@ public class ListUsersActivityAdapter extends ListAdapter<User, ListUsersActivit
 
     static class ViewHolder extends RecyclerView.ViewHolder {
 
+        private final TextView lblName;
+        private final TextView lblEmail;
+        private final TextView lblPhonenumber;
+        private final ImageView imgAvatar;
+        private final Button btnEdit;
+        private final Button btnDelete;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            imgAvatar = ViewCompat.requireViewById(itemView, R.id.imgAvatar);
+            lblName = ViewCompat.requireViewById(itemView, R.id.lblName);
+            lblEmail = ViewCompat.requireViewById(itemView, R.id.lblEmail);
+            lblPhonenumber = ViewCompat.requireViewById(itemView, R.id.lblPhonenumber);
+            btnEdit = ViewCompat.requireViewById(itemView, R.id.btnEdit);
+            btnDelete = ViewCompat.requireViewById(itemView, R.id.btnDelete);
+
         }
 
         public void bind(User user) {
-
+            imgAvatar.setImageResource(user.getAvatar().getImageResId());
+            lblName.setText(user.getName());
+            lblEmail.setText(user.getEmail());
+            lblPhonenumber.setText(String.valueOf(user.getPhoneNumber()));
         }
     }
 }

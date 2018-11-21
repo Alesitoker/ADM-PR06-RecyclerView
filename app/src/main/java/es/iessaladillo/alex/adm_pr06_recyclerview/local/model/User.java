@@ -1,5 +1,6 @@
 package es.iessaladillo.alex.adm_pr06_recyclerview.local.model;
 
+import androidx.annotation.NonNull;
 import es.iessaladillo.alex.adm_pr06_recyclerview.utils.ValidationUtils;
 
 public class User {
@@ -12,9 +13,10 @@ public class User {
     private String web;
     private static int counterId;
 
-    public User(String name, String email, int phoneNumber, String address, String web) {
+    public User(@NonNull Avatar avatar, String name, String email, int phoneNumber, String address, String web) {
         id = counterId;
         counterId++;
+        this.avatar = avatar;
         setName(name);
         setEmail(email);
         setPhoneNumber(phoneNumber);

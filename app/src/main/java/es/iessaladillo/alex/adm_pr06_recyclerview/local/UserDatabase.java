@@ -15,10 +15,11 @@ public class UserDatabase {
     private MutableLiveData<List<User>> usersLiveData = new MutableLiveData<>();
 
     private UserDatabase() {
+        AvatarDatabase avatarDatabase = AvatarDatabase.getInstance();
         users = new ArrayList<>(Arrays.asList(
-                new User("Baldo", "baldo@mero.com", 666666666, "La casa de baldo", "http://www.marca.com"),
-                new User("Pollo", "pollo@frito.es", 962746501, "El hogar", "https://www.youtube.com"),
-                new User("Aguacate", "Aguacatecito@sinmas.com", 972906203, "No tengo", "https://asoftmurmur.com/")
+                new User(avatarDatabase.queryAvatar(1), "Baldo", "baldo@mero.com", 666666666, "La casa de baldo", "http://www.marca.com"),
+                new User(avatarDatabase.queryAvatar(2), "Pollo", "pollo@frito.es", 962746501, "El hogar", "https://www.youtube.com"),
+                new User(avatarDatabase.queryAvatar(3), "Aguacate", "Aguacatecito@sinmas.com", 972906203, "No tengo", "https://asoftmurmur.com/")
         ));
         updateUsersLiveData();
     }

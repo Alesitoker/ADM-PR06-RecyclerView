@@ -18,10 +18,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="@dimen/list_item_CLayout">
+            android:paddingEnd="@dimen/list_item_CLayout"
+            android:paddingStart="@dimen/list_item_CLayout"
+            android:paddingTop="@dimen/list_item_CLayout"
+            >
 
             <TextView
-                android:id="@+id/lblNameCv"
+                android:id="@+id/lblName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/colorBlack"
@@ -31,57 +34,54 @@
                 tools:text="@tools:sample/full_names" />
 
             <TextView
-                android:id="@+id/lblEmailCv"
+                android:id="@+id/lblEmail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/colorBlack"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/lblNameCv"
+                app:layout_constraintTop_toBottomOf="@+id/lblName"
                 tools:text="test@test.es" />
 
             <TextView
-                android:id="@+id/lblPhonenumberCv"
+                android:id="@+id/lblPhonenumber"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/colorBlack"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/lblEmailCv"
+                app:layout_constraintTop_toBottomOf="@+id/lblEmail"
                 tools:text="@tools:sample/us_phones" />
 
             <ImageView
-                android:id="@+id/imgAvatarCv"
-                android:layout_width="@dimen/list_item_imgAvatarCv_size"
-                android:layout_height="@dimen/list_item_imgAvatarCv_size"
+                android:id="@+id/imgAvatar"
+                android:layout_width="@dimen/list_item_imgAvatar_size"
+                android:layout_height="@dimen/list_item_imgAvatar_size"
                 android:scaleType="centerCrop"
-                android:src="@drawable/cat1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
+            <Button
                 android:id="@+id/btnEdit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/list_item_marginStart_btnEdit"
-                android:layout_marginTop="@dimen/list_item_marginTop_btn"
-                android:text="EDIT"
+                android:background="@android:color/transparent"
+                android:text="@string/list_item_btnEdit"
                 android:textStyle="bold"
                 android:textColor="@color/colorBlack"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/lblPhonenumberCv" />
+                app:layout_constraintTop_toBottomOf="@+id/lblPhonenumber" />
 
-            <TextView
+            <Button
                 android:id="@+id/btnDelete"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/list_item_marginStart_btnDelete"
-                android:layout_marginTop="@dimen/list_item_marginTop_btn"
-                android:text="DELETE"
+                android:background="@android:color/transparent"
+                android:text="@string/list_item_btnDelete"
                 android:textStyle="bold"
                 android:textColor="@color/colorBlack"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/btnEdit"
-                app:layout_constraintTop_toBottomOf="@+id/lblPhonenumberCv" />
+                app:layout_constraintTop_toBottomOf="@+id/lblPhonenumber" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 </layout>
