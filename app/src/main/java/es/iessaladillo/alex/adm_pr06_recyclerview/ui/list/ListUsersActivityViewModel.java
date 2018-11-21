@@ -16,8 +16,8 @@ public class ListUsersActivityViewModel extends ViewModel {
         this.userDatabase = userDatabase;
     }
 
-    public LiveData<List<User>> getStudents(boolean forceLoad) {
-        if (users == null || forceLoad) {
+    public LiveData<List<User>> getStudents() {
+        if (users == null) {
             users = userDatabase.getUsers();
         }
         return users;

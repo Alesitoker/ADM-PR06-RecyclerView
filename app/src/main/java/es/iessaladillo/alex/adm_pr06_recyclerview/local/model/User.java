@@ -4,6 +4,7 @@ import es.iessaladillo.alex.adm_pr06_recyclerview.utils.ValidationUtils;
 
 public class User {
     private long id;
+    private Avatar avatar;
     private String name;
     private String email;
     private int phoneNumber;
@@ -23,6 +24,14 @@ public class User {
 
     public long getId() {
         return id;
+    }
+
+    public Avatar getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(Avatar avatar) {
+        this.avatar = avatar;
     }
 
     public String getName() {
