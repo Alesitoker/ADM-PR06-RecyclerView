@@ -18,7 +18,10 @@ import es.iessaladillo.alex.adm_pr06_recyclerview.local.model.User;
 
 public class ListUsersActivityAdapter extends ListAdapter<User, ListUsersActivityAdapter.ViewHolder> {
 
-    protected ListUsersActivityAdapter() {
+    private OnEditUserClickListener onEditUserClickListener;
+    private OnDeleteUserClickListener onDeleteUserClickListener;
+
+    public ListUsersActivityAdapter(OnEditUserClickListener onEditUserClickListener, OnDeleteUserClickListener onDeleteUserClickListener) {
         super(new DiffUtil.ItemCallback<User>() {
             @Override
             public boolean areItemsTheSame(@NonNull User oldItem, @NonNull User newItem) {
@@ -31,12 +34,15 @@ public class ListUsersActivityAdapter extends ListAdapter<User, ListUsersActivit
                         && oldItem.getPhoneNumber() == newItem.getPhoneNumber();
             }
         });
+
+        this.onEditUserClickListener = onEditUserClickListener;
+        this.onDeleteUserClickListener = onDeleteUserClickListener;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_list_item, parent, false));
+        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_list_item, parent, false), onEditUserClickListener, onDeleteUserClickListener);
     }
 
     @Override
@@ -63,7 +69,7 @@ public class ListUsersActivityAdapter extends ListAdapter<User, ListUsersActivit
         private final Button btnEdit;
         private final Button btnDelete;
 
-        public ViewHolder(@NonNull View itemView) {
+        public ViewHolder(@NonNull View itemView, OnEditUserClickListener onEditUserClickListener, OnDeleteUserClickListener onDeleteUserClickListener) {
             super(itemView);
             imgAvatar = ViewCompat.requireViewById(itemView, R.id.imgAvatar);
             lblName = ViewCompat.requireViewById(itemView, R.id.lblName);
@@ -71,6 +77,9 @@ public class ListUsersActivityAdapter extends ListAdapter<User, ListUsersActivit
             lblPhonenumber = ViewCompat.requireViewById(itemView, R.id.lblPhonenumber);
             btnEdit = ViewCompat.requireViewById(itemView, R.id.btnEdit);
             btnDelete = ViewCompat.requireViewById(itemView, R.id.btnDelete);
+
+            btnEdit.setOnClickListener(v -> onEditUserClickListener.onItemClick(getAdapterPosition()));
+            btnDelete.setOnClickListener(v -> onDeleteUserClickListener.onItemClick(getAdapterPosition()));
 
         }
 

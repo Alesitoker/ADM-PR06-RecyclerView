@@ -15,9 +15,11 @@ import es.iessaladillo.alex.adm_pr06_recyclerview.R;
 import es.iessaladillo.alex.adm_pr06_recyclerview.databinding.ActivityListBinding;
 import es.iessaladillo.alex.adm_pr06_recyclerview.local.UserDatabase;
 import es.iessaladillo.alex.adm_pr06_recyclerview.local.model.User;
+import es.iessaladillo.alex.adm_pr06_recyclerview.ui.profile.ProfileActivity;
 
 public class ListUsersActivity extends AppCompatActivity {
 
+    private static final int RC_EDIT = 13;
     private ActivityListBinding b;
     private ListUsersActivityViewModel viewModel;
     private ListUsersActivityAdapter listAdapter;
@@ -45,11 +47,16 @@ public class ListUsersActivity extends AppCompatActivity {
     }
 
     private void setupRecyclerView() {
-        listAdapter = new ListUsersActivityAdapter();
+        listAdapter = new ListUsersActivityAdapter(position -> editUser(listAdapter.getItem(position)), position -> viewModel.deleteUser(listAdapter.getItem(position)));
+
         b.lstUsers.setHasFixedSize(true);
         b.lstUsers.setLayoutManager(new GridLayoutManager(this, getResources().getInteger(R.integer.lstUsers_columns)));
         b.lstUsers.setItemAnimator(new DefaultItemAnimator());
         b.lstUsers.setAdapter(listAdapter);
 
+    }
+
+    private void editUser(User user) {
+        ProfileActivity.startForResult(this, RC_EDIT, user);
     }
 }

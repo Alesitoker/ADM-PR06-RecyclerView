@@ -1,9 +1,12 @@
 package es.iessaladillo.alex.adm_pr06_recyclerview.local.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import androidx.annotation.NonNull;
 import es.iessaladillo.alex.adm_pr06_recyclerview.utils.ValidationUtils;
 
-public class User {
+public class User implements Parcelable {
     private long id;
     private Avatar avatar;
     private String name;
@@ -22,6 +25,16 @@ public class User {
         setPhoneNumber(phoneNumber);
         setAddress(address);
         setWeb(web);
+    }
+
+    protected User(Parcel in) {
+        id = in.readLong();
+        avatar = in.readParcelable(Avatar.class.getClassLoader());
+        name = in.readString();
+        email = in.readString();
+        phoneNumber = in.readInt();
+        address = in.readString();
+        web = in.readString();
     }
 
     public long getId() {
@@ -85,4 +98,32 @@ public class User {
             this.web = web;
         }
     }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeLong(id);
+        dest.writeParcelable(avatar, flags);
+        dest.writeString(name);
+        dest.writeString(email);
+        dest.writeInt(phoneNumber);
+        dest.writeString(address);
+        dest.writeString(web);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<User> CREATOR = new Creator<User>() {
+        @Override
+        public User createFromParcel(Parcel in) {
+            return new User(in);
+        }
+
+        @Override
+        public User[] newArray(int size) {
+            return new User[size];
+        }
+    };
 }

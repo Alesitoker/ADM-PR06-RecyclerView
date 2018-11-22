@@ -1,5 +1,6 @@
 package es.iessaladillo.alex.adm_pr06_recyclerview.ui.profile;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -14,7 +15,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.lifecycle.ViewModelProviders;
 import es.iessaladillo.alex.adm_pr06_recyclerview.R;
+import es.iessaladillo.alex.adm_pr06_recyclerview.local.model.User;
 import es.iessaladillo.alex.adm_pr06_recyclerview.ui.avatar.AvatarActivity;
+import es.iessaladillo.alex.adm_pr06_recyclerview.ui.list.ListUsersActivity;
 import es.iessaladillo.alex.adm_pr06_recyclerview.utils.IntentsUtils;
 import es.iessaladillo.alex.adm_pr06_recyclerview.utils.KeyboardUtils;
 import es.iessaladillo.alex.adm_pr06_recyclerview.utils.SnackbarUtils;
@@ -40,6 +43,8 @@ public class ProfileActivity extends AppCompatActivity {
     private ImageView imgAddress;
     private ImageView imgWeb;
     private final int RC_AVATAR = 12;
+    private static final String EXTRA_USER = "EXTRA_USER";
+    private User user;
     private ProfileActivityViewModel viewModel;
 
     @Override
@@ -100,6 +105,15 @@ public class ProfileActivity extends AppCompatActivity {
         TextViewUtils.removeOnTextChanged(txtWeb);
     }
 
+    private void getIntentData() {
+        Intent intent = getIntent();
+        if (intent != null) {
+           if (intent.hasExtra(EXTRA_USER)) {
+               startProfile(intent.getParcelableExtra(EXTRA_USER));
+           }
+        }
+    }
+
     private void initViews() {
         lblAvatar = ActivityCompat.requireViewById(this, R.id.lblAvatar);
         imgAvatar = ActivityCompat.requireViewById(this, R.id.imgAvatar);
@@ -128,6 +142,10 @@ public class ProfileActivity extends AppCompatActivity {
         imgPhonenumber.setOnClickListener(v -> dialPhoneNumber());
         imgAddress.setOnClickListener(v -> searchInMap());
         imgWeb.setOnClickListener(v -> webSearch());
+    }
+
+    private void startProfile(User user) {
+        this.user = user;
     }
 
     private void defaultAvatar() {
@@ -298,12 +316,27 @@ public class ProfileActivity extends AppCompatActivity {
         return validName && validEmail && validPhonenumber && validAddress && validWeb;
     }
 
+    public static void startForResult(Activity activity, int requestCode, User user) {
+        Intent intent = new Intent(activity, ListUsersActivity.class);
+        intent.putExtra(EXTRA_USER, user);
+        activity.startActivityForResult(intent, requestCode);
+    }
+
+    private void submitUser() {
+        Intent result = new Intent();
+
+        result.putExtra(EXTRA_USER, user);
+        setResult(RESULT_OK, result);
+        finish();
+    }
+
     private void save() {
         KeyboardUtils.hideSoftKeyboard(this);
         if (!validate()) {
             SnackbarUtils.snackbar(lblName, getString(R.string.main_error_saving));
         } else {
             SnackbarUtils.snackbar(lblName, getString(R.string.main_saved_succesfully));
+            submitUser();
         }
     }
 }

@@ -42,7 +42,7 @@
             android:layout_height="wrap_content"
             android:src="@drawable/ic_add_black_24dp"
             android:tint="@color/white"
-            android:backgroundTint="@color/colorPrimary"
+            app:backgroundTint="@color/colorPrimary"
             android:layout_marginBottom="@dimen/list_fabtnAdd_margin"
             android:layout_marginEnd="@dimen/list_fabtnAdd_margin"
             app:layout_constraintEnd_toEndOf="parent"
