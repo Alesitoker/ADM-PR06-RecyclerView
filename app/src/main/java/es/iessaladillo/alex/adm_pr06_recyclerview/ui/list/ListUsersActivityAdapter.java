@@ -34,7 +34,6 @@ public class ListUsersActivityAdapter extends ListAdapter<User, ListUsersActivit
                         && oldItem.getPhoneNumber() == newItem.getPhoneNumber();
             }
         });
-
         this.onEditUserClickListener = onEditUserClickListener;
         this.onDeleteUserClickListener = onDeleteUserClickListener;
     }

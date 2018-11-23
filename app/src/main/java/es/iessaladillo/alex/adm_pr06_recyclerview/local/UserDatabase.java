@@ -11,7 +11,7 @@ import es.iessaladillo.alex.adm_pr06_recyclerview.local.model.User;
 public class UserDatabase {
 
     private static UserDatabase instance;
-    private List<User> users;
+    private ArrayList<User> users;
     private MutableLiveData<List<User>> usersLiveData = new MutableLiveData<>();
 
     private UserDatabase() {
@@ -40,7 +40,7 @@ public class UserDatabase {
     }
 
     private void updateUsersLiveData() {
-        usersLiveData.setValue(users);
+        usersLiveData.setValue(new ArrayList<>(users));
     }
 
     public void addUser(User user) {
@@ -57,6 +57,4 @@ public class UserDatabase {
         users.set(users.indexOf(user), user);
         updateUsersLiveData();
     }
-
-
 }

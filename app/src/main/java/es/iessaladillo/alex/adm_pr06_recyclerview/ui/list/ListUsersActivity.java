@@ -34,7 +34,7 @@ public class ListUsersActivity extends AppCompatActivity {
     }
 
     private void observerUsers() {
-        viewModel.getStudents().observe(this, this::refresherListAdapter);
+        viewModel.getUsers().observe(this, this::refresherListAdapter);
     }
 
     private void refresherListAdapter(List<User> users) {

@@ -317,7 +317,7 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     public static void startForResult(Activity activity, int requestCode, User user) {
-        Intent intent = new Intent(activity, ListUsersActivity.class);
+        Intent intent = new Intent(activity, ProfileActivity.class);
         intent.putExtra(EXTRA_USER, user);
         activity.startActivityForResult(intent, requestCode);
     }

@@ -16,7 +16,7 @@ public class ListUsersActivityViewModel extends ViewModel {
         this.userDatabase = userDatabase;
     }
 
-    public LiveData<List<User>> getStudents() {
+    public LiveData<List<User>> getUsers() {
         if (users == null) {
             users = userDatabase.getUsers();
         }
