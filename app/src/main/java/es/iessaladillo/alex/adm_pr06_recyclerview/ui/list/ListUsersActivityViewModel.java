@@ -23,15 +23,9 @@ public class ListUsersActivityViewModel extends ViewModel {
         return users;
     }
 
-    public void addUser(User user) {
-        database.addUser(user);
-    }
-
     public void deleteUser(User user) {
         database.deleteUser(user);
     }
 
-    public void saveEditedUser(User user) {
-        database.saveEditedUser(user);
-    }
+
 }

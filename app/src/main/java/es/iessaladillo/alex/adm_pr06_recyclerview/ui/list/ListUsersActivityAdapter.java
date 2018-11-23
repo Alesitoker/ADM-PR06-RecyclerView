@@ -31,7 +31,7 @@ public class ListUsersActivityAdapter extends ListAdapter<User, ListUsersActivit
             @Override
             public boolean areContentsTheSame(@NonNull User oldItem, @NonNull User newItem) {
                 return TextUtils.equals(oldItem.getName(), newItem.getName()) && TextUtils.equals(oldItem.getEmail(), newItem.getEmail())
-                        && oldItem.getPhoneNumber() == newItem.getPhoneNumber();
+                        && oldItem.getPhoneNumber() == newItem.getPhoneNumber() && oldItem.getAvatar().getId() == newItem.getAvatar().getId();
             }
         });
         this.onEditUserClickListener = onEditUserClickListener;

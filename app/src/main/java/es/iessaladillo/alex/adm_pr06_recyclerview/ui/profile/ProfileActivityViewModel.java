@@ -3,6 +3,7 @@ package es.iessaladillo.alex.adm_pr06_recyclerview.ui.profile;
 import androidx.lifecycle.ViewModel;
 import es.iessaladillo.alex.adm_pr06_recyclerview.local.Database;
 import es.iessaladillo.alex.adm_pr06_recyclerview.local.model.Avatar;
+import es.iessaladillo.alex.adm_pr06_recyclerview.local.model.User;
 
 public class ProfileActivityViewModel extends ViewModel {
 
@@ -64,5 +65,13 @@ public class ProfileActivityViewModel extends ViewModel {
 
     public void setValid_web(boolean valid_web) {
         this.valid_web = valid_web;
+    }
+
+    public void saveEditedUser(User user, int position) {
+        database.saveEditedUser(user, position);
+    }
+
+    public void addUser(User user) {
+        database.addUser(user);
     }
 }

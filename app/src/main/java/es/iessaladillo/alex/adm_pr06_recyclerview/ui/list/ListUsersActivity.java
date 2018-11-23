@@ -44,10 +44,16 @@ public class ListUsersActivity extends AppCompatActivity {
 
     private void setupViews() {
         setupRecyclerView();
+
+        b.fabtnAdd.setOnClickListener(v -> openProfile(new User()));
+    }
+
+    private void openProfile(User user) {
+        ProfileActivity.startActivity(this, user);
     }
 
     private void setupRecyclerView() {
-        listAdapter = new ListUsersActivityAdapter(position -> editUser(listAdapter.getItem(position)), position -> viewModel.deleteUser(listAdapter.getItem(position)));
+        listAdapter = new ListUsersActivityAdapter(position -> openProfile(listAdapter.getItem(position), position), position -> viewModel.deleteUser(listAdapter.getItem(position)));
 
         b.lstUsers.setHasFixedSize(true);
         b.lstUsers.setLayoutManager(new GridLayoutManager(this, getResources().getInteger(R.integer.lstUsers_columns)));
@@ -56,7 +62,7 @@ public class ListUsersActivity extends AppCompatActivity {
 
     }
 
-    private void editUser(User user) {
-        ProfileActivity.startForResult(this, RC_EDIT, user);
+    private void openProfile(User user, int position) {
+        ProfileActivity.startActivity(this, user, position);
     }
 }

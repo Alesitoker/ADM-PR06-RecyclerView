@@ -106,8 +106,8 @@ public class Database {
         updateUsersLiveData();
     }
 
-    public void saveEditedUser(User user) {
-        users.set(users.indexOf(user), user);
+    public void saveEditedUser(User user, int position) {
+        users.set(position, user);
         updateUsersLiveData();
     }
 }

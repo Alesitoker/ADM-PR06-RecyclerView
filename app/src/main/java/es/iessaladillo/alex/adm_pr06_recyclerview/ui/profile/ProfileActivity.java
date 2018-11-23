@@ -17,7 +17,6 @@ import androidx.lifecycle.ViewModelProviders;
 import es.iessaladillo.alex.adm_pr06_recyclerview.R;
 import es.iessaladillo.alex.adm_pr06_recyclerview.local.model.User;
 import es.iessaladillo.alex.adm_pr06_recyclerview.ui.avatar.AvatarActivity;
-import es.iessaladillo.alex.adm_pr06_recyclerview.ui.list.ListUsersActivity;
 import es.iessaladillo.alex.adm_pr06_recyclerview.utils.IntentsUtils;
 import es.iessaladillo.alex.adm_pr06_recyclerview.utils.KeyboardUtils;
 import es.iessaladillo.alex.adm_pr06_recyclerview.utils.SnackbarUtils;
@@ -44,7 +43,9 @@ public class ProfileActivity extends AppCompatActivity {
     private ImageView imgWeb;
     private final int RC_AVATAR = 12;
     private static final String EXTRA_USER = "EXTRA_USER";
+    private static final String EXTRA_POSITION_LIST = "EXTRA_POSITION_LIST";
     private User user;
+    private int positionList;
     private ProfileActivityViewModel viewModel;
 
     @Override
@@ -52,10 +53,13 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_full);
         viewModel = ViewModelProviders.of(this).get(ProfileActivityViewModel.class);
+        getIntentData();
         initViews();
-        //Al iniciar por primera vez no entra.
         if (savedInstanceState != null) {
             setupSaveData();
+        }
+        if (user.getAvatar() != null) {
+            startProfile();
         }
     }
 
@@ -109,7 +113,8 @@ public class ProfileActivity extends AppCompatActivity {
         Intent intent = getIntent();
         if (intent != null) {
            if (intent.hasExtra(EXTRA_USER)) {
-               startProfile(intent.getParcelableExtra(EXTRA_USER));
+               user = intent.getParcelableExtra(EXTRA_USER);
+               positionList = intent.getIntExtra(EXTRA_POSITION_LIST, -1);
            }
         }
     }
@@ -144,8 +149,14 @@ public class ProfileActivity extends AppCompatActivity {
         imgWeb.setOnClickListener(v -> webSearch());
     }
 
-    private void startProfile(User user) {
-        this.user = user;
+    private void startProfile() {
+        viewModel.setAvatar(user.getAvatar());
+        showAvatar();
+        txtName.setText(user.getName());
+        txtEmail.setText(user.getEmail());
+        txtPhonenumber.setText(String.valueOf(user.getPhoneNumber()));
+        txtAddress.setText(user.getAddress());
+        txtWeb.setText(user.getWeb());
     }
 
     private void defaultAvatar() {
@@ -316,18 +327,37 @@ public class ProfileActivity extends AppCompatActivity {
         return validName && validEmail && validPhonenumber && validAddress && validWeb;
     }
 
-    public static void startForResult(Activity activity, int requestCode, User user) {
+    public static void startActivity(Activity activity, User user, int position) {
         Intent intent = new Intent(activity, ProfileActivity.class);
         intent.putExtra(EXTRA_USER, user);
-        activity.startActivityForResult(intent, requestCode);
+        intent.putExtra(EXTRA_POSITION_LIST, position);
+        activity.startActivity(intent);
+    }
+
+    public static void startActivity(Activity activity, User user) {
+        Intent intent = new Intent(activity, ProfileActivity.class);
+        intent.putExtra(EXTRA_USER, user);
+        activity.startActivity(intent);
     }
 
     private void submitUser() {
-        Intent result = new Intent();
+        savedUser();
 
-        result.putExtra(EXTRA_USER, user);
-        setResult(RESULT_OK, result);
         finish();
+    }
+
+    private void savedUser() {
+        user.setAvatar(viewModel.getAvatar());
+        user.setName(String.valueOf(txtName.getText()));
+        user.setEmail(String.valueOf(txtEmail.getText()));
+        user.setPhoneNumber(Integer.valueOf(String.valueOf(txtPhonenumber.getText())));
+        user.setAddress(String.valueOf(txtAddress.getText()));
+        user.setWeb(String.valueOf(txtWeb.getText()));
+        if (positionList != -1) {
+            viewModel.saveEditedUser(user, positionList);
+        } else {
+            viewModel.addUser(user);
+        }
     }
 
     private void save() {

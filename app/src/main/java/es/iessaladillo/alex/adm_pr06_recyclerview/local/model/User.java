@@ -27,6 +27,11 @@ public class User implements Parcelable {
         setWeb(web);
     }
 
+    public User() {
+        id = counterId;
+        counterId++;
+    }
+
     protected User(Parcel in) {
         id = in.readLong();
         avatar = in.readParcelable(Avatar.class.getClassLoader());
