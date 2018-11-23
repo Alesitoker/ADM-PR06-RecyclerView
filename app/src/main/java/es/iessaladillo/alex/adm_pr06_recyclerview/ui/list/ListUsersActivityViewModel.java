@@ -4,34 +4,34 @@ import java.util.List;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
-import es.iessaladillo.alex.adm_pr06_recyclerview.local.UserDatabase;
+import es.iessaladillo.alex.adm_pr06_recyclerview.local.Database;
 import es.iessaladillo.alex.adm_pr06_recyclerview.local.model.User;
 
 public class ListUsersActivityViewModel extends ViewModel {
 
-    private final UserDatabase userDatabase;
+    private final Database database;
     private LiveData<List<User>> users;
 
-    public ListUsersActivityViewModel(UserDatabase userDatabase) {
-        this.userDatabase = userDatabase;
+    public ListUsersActivityViewModel(Database database) {
+        this.database = database;
     }
 
     public LiveData<List<User>> getUsers() {
         if (users == null) {
-            users = userDatabase.getUsers();
+            users = database.getUsers();
         }
         return users;
     }
 
     public void addUser(User user) {
-        userDatabase.addUser(user);
+        database.addUser(user);
     }
 
     public void deleteUser(User user) {
-        userDatabase.deleteUser(user);
+        database.deleteUser(user);
     }
 
     public void saveEditedUser(User user) {
-        userDatabase.saveEditedUser(user);
+        database.saveEditedUser(user);
     }
 }

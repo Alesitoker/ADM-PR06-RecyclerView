@@ -1,12 +1,12 @@
 package es.iessaladillo.alex.adm_pr06_recyclerview.ui.profile;
 
 import androidx.lifecycle.ViewModel;
-import es.iessaladillo.alex.adm_pr06_recyclerview.local.AvatarDatabase;
+import es.iessaladillo.alex.adm_pr06_recyclerview.local.Database;
 import es.iessaladillo.alex.adm_pr06_recyclerview.local.model.Avatar;
 
 public class ProfileActivityViewModel extends ViewModel {
 
-    private final AvatarDatabase avatarDatabase = AvatarDatabase.getInstance();
+    private final Database database = Database.getInstance();
     private Avatar avatar;
     private boolean valid_name = true;
     private boolean valid_email = true;
@@ -23,7 +23,7 @@ public class ProfileActivityViewModel extends ViewModel {
     }
 
     public Avatar getDefaultAvatar() {
-        return avatarDatabase.getDefaultAvatar();
+        return database.getDefaultAvatar();
     }
 
     public boolean isValid_name() {

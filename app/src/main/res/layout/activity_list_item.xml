@@ -53,11 +53,14 @@
 
             <ImageView
                 android:id="@+id/imgAvatar"
-                android:layout_width="@dimen/list_item_imgAvatar_size"
-                android:layout_height="@dimen/list_item_imgAvatar_size"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
                 android:scaleType="centerCrop"
+                app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="@+id/lblPhonenumber"
+                />
 
             <Button
                 android:id="@+id/btnEdit"

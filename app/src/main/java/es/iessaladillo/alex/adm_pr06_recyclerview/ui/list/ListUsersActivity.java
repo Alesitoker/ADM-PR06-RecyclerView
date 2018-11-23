@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
 import es.iessaladillo.alex.adm_pr06_recyclerview.R;
 import es.iessaladillo.alex.adm_pr06_recyclerview.databinding.ActivityListBinding;
-import es.iessaladillo.alex.adm_pr06_recyclerview.local.UserDatabase;
+import es.iessaladillo.alex.adm_pr06_recyclerview.local.Database;
 import es.iessaladillo.alex.adm_pr06_recyclerview.local.model.User;
 import es.iessaladillo.alex.adm_pr06_recyclerview.ui.profile.ProfileActivity;
 
@@ -28,7 +28,7 @@ public class ListUsersActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         b = DataBindingUtil.setContentView(this, R.layout.activity_list);
-        viewModel = ViewModelProviders.of(this, new ListUsersActivityViewModelFactory(UserDatabase.getInstance())).get(ListUsersActivityViewModel.class);
+        viewModel = ViewModelProviders.of(this, new ListUsersActivityViewModelFactory(Database.getInstance())).get(ListUsersActivityViewModel.class);
         setupViews();
         observerUsers();
     }

@@ -22,6 +22,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             />
+        <!-- TODO android:paddingBottom="20dp"-->
+        <!-- TODO android:clipToPadding="false"-->
 
         <TextView
             android:id="@+id/lblEmptyView"

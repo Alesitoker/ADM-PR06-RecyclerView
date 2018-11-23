@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Profile</string>
+    <string name="app_name">List users</string>
     <string name="avatar_label">Select Avatar</string>
     <string name="profile_user">User profile</string>
     <string name="main_invalid_data">Invalid data</string>
