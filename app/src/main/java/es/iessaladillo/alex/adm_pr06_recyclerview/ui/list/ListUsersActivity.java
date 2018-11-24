@@ -44,7 +44,8 @@ public class ListUsersActivity extends AppCompatActivity {
     private void setupViews() {
         setupRecyclerView();
 
-        b.fabtnAdd.setOnClickListener(v -> openProfile(new User()));
+        b.fabtnAdd.setOnClickListener(v -> addUser());
+        b.lblEmptyView.setOnClickListener(v -> addUser());
     }
 
     private void setupRecyclerView() {
@@ -61,5 +62,8 @@ public class ListUsersActivity extends AppCompatActivity {
 
     private void openProfile(User user) {
         ProfileActivity.startActivity(this, user);
+    }
+    private void addUser() {
+        openProfile(new User());
     }
 }

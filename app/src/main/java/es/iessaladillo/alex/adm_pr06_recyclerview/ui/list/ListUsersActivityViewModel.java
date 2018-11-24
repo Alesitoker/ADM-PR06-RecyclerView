@@ -27,5 +27,4 @@ public class ListUsersActivityViewModel extends ViewModel {
         database.deleteUser(user);
     }
 
-
 }
