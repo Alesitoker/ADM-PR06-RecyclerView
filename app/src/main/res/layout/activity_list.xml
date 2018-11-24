@@ -24,8 +24,6 @@
             android:paddingBottom="80dp"
             android:clipToPadding="false"
             />
-        <!-- TODO android:paddingBottom="20dp"-->
-        <!-- TODO android:clipToPadding="false"-->
 
         <TextView
             android:id="@+id/lblEmptyView"

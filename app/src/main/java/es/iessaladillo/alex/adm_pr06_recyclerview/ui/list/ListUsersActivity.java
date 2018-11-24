@@ -19,7 +19,6 @@ import es.iessaladillo.alex.adm_pr06_recyclerview.ui.profile.ProfileActivity;
 
 public class ListUsersActivity extends AppCompatActivity {
 
-    private static final int RC_EDIT = 13;
     private ActivityListBinding b;
     private ListUsersActivityViewModel viewModel;
     private ListUsersActivityAdapter listAdapter;
@@ -48,12 +47,10 @@ public class ListUsersActivity extends AppCompatActivity {
         b.fabtnAdd.setOnClickListener(v -> openProfile(new User()));
     }
 
-    private void openProfile(User user) {
-        ProfileActivity.startActivity(this, user);
-    }
-
     private void setupRecyclerView() {
-        listAdapter = new ListUsersActivityAdapter(position -> openProfile(listAdapter.getItem(position), position), position -> viewModel.deleteUser(listAdapter.getItem(position)));
+        listAdapter = new ListUsersActivityAdapter();
+        listAdapter.setOnEditUserClickListener(position -> openProfile(listAdapter.getItem(position)));
+        listAdapter.setOnDeleteUserClickListener(position -> viewModel.deleteUser(listAdapter.getItem(position)));
 
         b.lstUsers.setHasFixedSize(true);
         b.lstUsers.setLayoutManager(new GridLayoutManager(this, getResources().getInteger(R.integer.lstUsers_columns)));
@@ -62,7 +59,7 @@ public class ListUsersActivity extends AppCompatActivity {
 
     }
 
-    private void openProfile(User user, int position) {
-        ProfileActivity.startActivity(this, user, position);
+    private void openProfile(User user) {
+        ProfileActivity.startActivity(this, user);
     }
 }

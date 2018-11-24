@@ -106,7 +106,15 @@ public class Database {
         updateUsersLiveData();
     }
 
-    public void saveEditedUser(User user, int position) {
+    public void saveEditedUser(User user) {
+        int position = -1;
+
+        for(int i = 0; i < users.size() && position == -1; i++)  {
+            if (users.get(i).getId() == user.getId()) {
+                position = i;
+            }
+        }
+
         users.set(position, user);
         updateUsersLiveData();
     }

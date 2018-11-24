@@ -67,8 +67,8 @@ public class ProfileActivityViewModel extends ViewModel {
         this.valid_web = valid_web;
     }
 
-    public void saveEditedUser(User user, int position) {
-        database.saveEditedUser(user, position);
+    public void saveEditedUser(User user) {
+        database.saveEditedUser(user);
     }
 
     public void addUser(User user) {

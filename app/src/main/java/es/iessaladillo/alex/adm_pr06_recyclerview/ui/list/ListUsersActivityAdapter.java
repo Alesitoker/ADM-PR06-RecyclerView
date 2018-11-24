@@ -21,7 +21,7 @@ public class ListUsersActivityAdapter extends ListAdapter<User, ListUsersActivit
     private OnEditUserClickListener onEditUserClickListener;
     private OnDeleteUserClickListener onDeleteUserClickListener;
 
-    public ListUsersActivityAdapter(OnEditUserClickListener onEditUserClickListener, OnDeleteUserClickListener onDeleteUserClickListener) {
+    public ListUsersActivityAdapter() {
         super(new DiffUtil.ItemCallback<User>() {
             @Override
             public boolean areItemsTheSame(@NonNull User oldItem, @NonNull User newItem) {
@@ -34,8 +34,6 @@ public class ListUsersActivityAdapter extends ListAdapter<User, ListUsersActivit
                         && oldItem.getPhoneNumber() == newItem.getPhoneNumber() && oldItem.getAvatar().getId() == newItem.getAvatar().getId();
             }
         });
-        this.onEditUserClickListener = onEditUserClickListener;
-        this.onDeleteUserClickListener = onDeleteUserClickListener;
     }
 
     @NonNull
@@ -57,6 +55,14 @@ public class ListUsersActivityAdapter extends ListAdapter<User, ListUsersActivit
     @Override
     public User getItem(int position) {
         return super.getItem(position);
+    }
+
+    public void setOnEditUserClickListener(OnEditUserClickListener onEditUserClickListener) {
+        this.onEditUserClickListener = onEditUserClickListener;
+    }
+
+    public void setOnDeleteUserClickListener(OnDeleteUserClickListener onDeleteUserClickListener) {
+        this.onDeleteUserClickListener = onDeleteUserClickListener;
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {

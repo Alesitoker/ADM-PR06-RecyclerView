@@ -22,8 +22,8 @@ public class AvatarActivity extends AppCompatActivity {
 
     @VisibleForTesting
     public static final String EXTRA_AVATAR = "EXTRA_AVATAR";
-    ImageView imgAvatars[] = new ImageView[6];
-    TextView lblAvatars[] = new TextView[6];
+    private ImageView imgAvatars[] = new ImageView[6];
+    private TextView lblAvatars[] = new TextView[6];
     private final byte positionAvatar1 = 0;
     private final byte positionAvatar2 = 1;
     private final byte positionAvatar3 = 2;

@@ -43,9 +43,8 @@ public class ProfileActivity extends AppCompatActivity {
     private ImageView imgWeb;
     private final int RC_AVATAR = 12;
     private static final String EXTRA_USER = "EXTRA_USER";
-    private static final String EXTRA_POSITION_LIST = "EXTRA_POSITION_LIST";
     private User user;
-    private int positionList;
+    private boolean isNewUser = false;
     private ProfileActivityViewModel viewModel;
 
     @Override
@@ -60,6 +59,8 @@ public class ProfileActivity extends AppCompatActivity {
         }
         if (user.getAvatar() != null) {
             startProfile();
+        } else {
+            isNewUser = true;
         }
     }
 
@@ -114,7 +115,6 @@ public class ProfileActivity extends AppCompatActivity {
         if (intent != null) {
            if (intent.hasExtra(EXTRA_USER)) {
                user = intent.getParcelableExtra(EXTRA_USER);
-               positionList = intent.getIntExtra(EXTRA_POSITION_LIST, -1);
            }
         }
     }
@@ -327,13 +327,6 @@ public class ProfileActivity extends AppCompatActivity {
         return validName && validEmail && validPhonenumber && validAddress && validWeb;
     }
 
-    public static void startActivity(Activity activity, User user, int position) {
-        Intent intent = new Intent(activity, ProfileActivity.class);
-        intent.putExtra(EXTRA_USER, user);
-        intent.putExtra(EXTRA_POSITION_LIST, position);
-        activity.startActivity(intent);
-    }
-
     public static void startActivity(Activity activity, User user) {
         Intent intent = new Intent(activity, ProfileActivity.class);
         intent.putExtra(EXTRA_USER, user);
@@ -353,15 +346,17 @@ public class ProfileActivity extends AppCompatActivity {
         user.setPhoneNumber(Integer.valueOf(String.valueOf(txtPhonenumber.getText())));
         user.setAddress(String.valueOf(txtAddress.getText()));
         user.setWeb(String.valueOf(txtWeb.getText()));
-        if (positionList != -1) {
-            viewModel.saveEditedUser(user, positionList);
-        } else {
+
+        if (isNewUser) {
             viewModel.addUser(user);
+        } else {
+            viewModel.saveEditedUser(user);
         }
     }
 
     private void save() {
         KeyboardUtils.hideSoftKeyboard(this);
+
         if (!validate()) {
             SnackbarUtils.snackbar(lblName, getString(R.string.main_error_saving));
         } else {
